@@ -34,7 +34,7 @@
 
 //export default registerUser;
 
-export default function registerUser(req, res) {
+/* export default function registerUser(req, res) {
 
 
        const {username, email, password} = req.body
@@ -44,6 +44,22 @@ export default function registerUser(req, res) {
 
     
 }
+
+
+*/
+
+
+export default function registerUser(req, res) {
+
+   const {username, email, password} = req.body
+
+   res.json({username, email, password})
+
+
+  
+}
+
+//export default registerUser
 
 
 
