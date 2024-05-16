@@ -1,67 +1,184 @@
-import { useState , useEffect} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  //const [count, setCount] = useState(0)
 
-  //const[user, setuser]  = useState([])
 
-  const[email, setemail] = useState("")
+import React from "react"
 
-  const[name, setname] = useState("")
+import { useState } from "react"
 
-  const[password, setpassword] = useState("")
+import "./App.css"
 
-   
-    function Name(e) {
+export default function App() {
 
-      setname(e.target.value)
-      
-    }
+   const[name, setname] = useState("")
 
-     function Email(e) {
+   const[email, setemail] = useState("")
 
-      setemail(e.target.value)
-      
-     }
-   
-     function Password(e) {
+   const[password, setpassword] = useState("")
 
-      setpassword(e.target.value)
+
+     function Name(e) {
+
+        setname(e.target.value)
+
+
       
      }
 
-     function Click() {
+      function Email(e) {
 
-       console.log(email, password, name)
-      
-     }
+        setemail(e.target.value)
 
 
+        
+      }
 
-  return (
-    <>
-      
-       <h1>HAPPY FULLSTACK</h1>
+      function Password(e) {
 
-       <input onChange={Name} type="text" placeholder='name' />
+        setpassword(e.target.value)
+       
+        
+      }
 
-       <input onChange={Email} type="text" placeholder='Email' />
+     async function Register() {
 
-       <input onChange={Password} type="password" placeholder='Password' />
+       // console.log("Name:", name, "Email:", email, "Password :", password)
 
-       <button onClick={Click}>Register</button>
+           try {
+
+            const response = await fetch('http://localhost:3000/api/users/register', {
+
+             method: 'POST',
+
+               headers: {
+
+                'Content-type': 'application/json',
+
+
+
+               },
+
+
+              body: JSON.stringify({
+
+                username: name, email, password
+                
+                
 
 
 
 
 
-    </>
-  )
+
+
+
+
+              })
+
+             
+
+
+
+
+
+
+
+
+
+            })
+
+               const data = await response.json()
+
+               console.log("user registered", data)
+
+
+
+            
+           } catch (error) {
+
+           console.log(error.message);
+
+
+            
+           }
+
+
+
+
+
+
+
+
+
+
+        
+      }
+
+
+    return(
+
+     <>
+     
+        <div className="form">
+
+
+            <input onChange={Name} placeholder="Username" type="text" />
+            
+            
+            
+            <input onChange={Email} placeholder="Email" type="text" />
+            
+          
+            <input onChange={Password} placeholder="Password" type="text" />
+
+
+
+            <button onClick={Register}>Register!!</button>
+
+
+
+
+
+
+        </div>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     </>
+
+
+
+
+
+
+
+
+    )
+
+
+
+
+
+
+
+
+  
 }
 
-export default App
+
+
+
+
+
+
+
+
+
+
 
 
