@@ -57,6 +57,17 @@ export default function App() {
 
        // console.log("Name:", name, "Email:", email, "Password :", password)
 
+       if (!name || !email || !password) {
+        alert("All fields are required for registration");
+        return;
+      }
+
+
+
+
+
+
+
            try {
 
             const response = await fetch('http://localhost:3000/api/users/register', {
@@ -134,6 +145,15 @@ export default function App() {
 
         async function Login() {
 
+          if (!name || !email || !password) {
+            alert("All fields are required for registration");
+            return;
+          }
+
+
+
+
+
 
 
          try {
@@ -171,17 +191,38 @@ export default function App() {
 
           const data = await response.json()
 
-         console.log("user logged in", data)   
+        
          
+         //setshow(false)
+
+        // setdark(true)
+
+         if(response.ok){
+
+          console.log("user logged in", data)   
+
          setshow(false)
 
          setdark(true)
+
+
+         } else {
+
+           alert('SAHI PASSWORD LIKHO BABY!!!')
+
+         }
 
 
           
          } catch (error) {
 
            console.log(error.message)
+
+          // setshow(true)
+
+          // setdark(false)
+
+
           
          }
            
