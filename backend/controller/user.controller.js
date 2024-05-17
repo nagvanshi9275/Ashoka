@@ -3,6 +3,8 @@
 import { User } from "../models/user.models.js"
 
 
+
+
 export default async function registerUser(req, res) {
 
    //const {username, email, password} = req.body

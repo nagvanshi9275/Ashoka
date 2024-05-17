@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         
         type: String,
 
-
+       unique: true,
 
 
         },
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
 
         required: true,
 
-        unique: true
+        
 
 
 

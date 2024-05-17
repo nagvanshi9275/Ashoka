@@ -5,7 +5,11 @@ import React from "react"
 
 import { useState } from "react"
 
-import "./App.css"
+import "./App.css";
+
+import { Button } from 'react-bootstrap';
+
+
 
 export default function App() {
 
@@ -14,6 +18,16 @@ export default function App() {
    const[email, setemail] = useState("")
 
    const[password, setpassword] = useState("")
+
+   const[show, setshow] = useState(true)
+
+   const[dark, setdark] = useState(false)
+
+
+
+     
+
+
 
 
      function Name(e) {
@@ -90,7 +104,9 @@ export default function App() {
 
                console.log("user registered", data)
 
+                setshow(false)
 
+                setdark(true)
 
             
            } catch (error) {
@@ -113,31 +129,100 @@ export default function App() {
         
       }
 
+ 
+
+
+        async function Login() {
+
+
+
+         try {
+
+         const response = await fetch('http://localhost:3000/api/users/login', {
+
+          method: 'POST',
+
+
+          headers: {
+
+            'Content-type': 'application/json',
+
+
+
+          },
+
+              body: JSON.stringify({
+
+               username: name,
+
+               email: email,
+
+               password: password
+
+
+
+
+              })
+            
+
+
+
+         })
+
+          const data = await response.json()
+
+         console.log("user logged in", data)   
+         
+         setshow(false)
+
+         setdark(true)
+
+
+          
+         } catch (error) {
+
+           console.log(error.message)
+          
+         }
+           
+
+
+
+         }
+
+          
+       
+      
+
+   
+
 
     return(
 
      <>
+
+
+        {show &&
      
         <div className="form">
 
 
-            <input onChange={Name} placeholder="Username" type="text" />
+            <input className="input3" onChange={Name} placeholder="Username" type="text" />
             
             
             
-            <input onChange={Email} placeholder="Email" type="text" />
+            <input className="input3" onChange={Email} placeholder="Email" type="text" />
             
           
-            <input onChange={Password} placeholder="Password" type="text" />
+            <input className="input3" onChange={Password} placeholder="Password" type="text" />
 
 
+            <button className="don" onClick={Register}>Register!!</button>
 
-            <button onClick={Register}>Register!!</button>
+             
+             <Button className="dhoni" onClick={Login}>LOGIN</Button>
 
-
-
-
-
+             
 
         </div>
      
@@ -145,9 +230,9 @@ export default function App() {
      
      
      
+            }
      
-     
-     
+            {dark && <h1>SO YOUR DATA ADDED TO MONGODB</h1>}
      
      </>
 
