@@ -3,7 +3,7 @@
 
 import { Userdata } from "../models/userdata.model.js";
 
-import { User } from "../models/user.models";
+import { User } from "../models/user.models.js";
 
 
 export default async function Createddata(req, res) {
@@ -22,7 +22,10 @@ export default async function Createddata(req, res) {
         if(!user) return res.status(404).json({message: "User not found"})
 
 
-        let userdata = await Userdata.findOne({username : user.username})
+       // let userdata = await Userdata.findOne({username : user.username})
+
+       let userdata = await Userdata.findOne({ username: user.username });
+
 
 
          if(!userdata){

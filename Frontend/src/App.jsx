@@ -273,7 +273,7 @@ export default function App() {
      
             }
      
-            {dark && <Compnent name={name}/>}
+            {dark && <Compnent name={name} email={email}/>}
      
      </>
 

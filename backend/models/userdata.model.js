@@ -21,8 +21,8 @@ const userdataschema = new mongoose.Schema({
 
        username: {
 
-       type: mongoose.Schema.ObjectId,
-       ref: "User",
+       type: String,
+       required: true,
 
 
 
