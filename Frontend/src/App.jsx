@@ -1,7 +1,7 @@
 
 
 
-import React from "react"
+import React, { Component } from "react"
 
 import { useState } from "react"
 
@@ -9,7 +9,7 @@ import "./App.css";
 
 import { Button } from 'react-bootstrap';
 
-
+import Compnent from "./component";
 
 export default function App() {
 
@@ -273,7 +273,7 @@ export default function App() {
      
             }
      
-            {dark && <h1>SO YOUR DATA ADDED TO MONGODB</h1>}
+            {dark && <Compnent name={name}/>}
      
      </>
 
