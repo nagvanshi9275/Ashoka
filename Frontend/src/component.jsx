@@ -1,19 +1,22 @@
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {Button} from "react-bootstrap";
 
 import "./App.css";
 
 
-
+import Form from 'react-bootstrap/Form';
  
 
 
 
 
-export default function Compnent({name, email}){
+export default  function Compnent({name, email}){
+
+
+    const[collection, setcollection] = useState([])
 
 
          async function  Click() {
@@ -37,7 +40,6 @@ export default function Compnent({name, email}){
              email: email,
 
              message: "DABAO"
-
 
             })
 
@@ -79,6 +81,79 @@ export default function Compnent({name, email}){
             
           }
 
+        
+
+
+
+        
+
+
+
+             useEffect(() => {
+
+
+               async function Fetch() {
+
+                    try {
+
+
+                       
+               const response = await fetch('http://localhost:3000/api/users/adddata')
+
+               const data = await response.json()
+
+               setcollection(data)
+
+
+
+
+                      
+                    } catch (error) {
+
+                      console.log(error.message)
+                      
+                    }
+
+
+
+
+
+                
+               }
+
+             
+              Fetch()
+             
+             
+             
+             
+             
+             }, [] )
+
+
+
+
+
+
+
+      const renderr =  collection.map((pre, index) => (
+
+
+            <div key={index}>
+
+             <h1>{pre.username}</h1>
+
+
+
+
+            </div>
+
+
+
+
+
+        ))
+
 
 
 
@@ -90,9 +165,18 @@ export default function Compnent({name, email}){
         <div className="emil">
 
 
+        <Form.Control aria-label="First name" />
+
+
           <Button onClick={Click}>DABAO</Button>
 
+
+
+
+
         <h1>WELCOME {name} 🏋 </h1>
+
+        {renderr}
 
 
         </div>
