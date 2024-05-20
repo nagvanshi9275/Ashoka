@@ -16,32 +16,108 @@ import Form from 'react-bootstrap/Form';
 export default  function Compnent({name, email}){
 
 
-    const[collection, setcollection] = useState([])
+  const[content, setcontent] = useState([])
+
+     useEffect(() => {
 
 
-         async function  Click() {
+         async function Fetch() {
 
-          try {
+              try {
 
-            const response = await fetch('http://localhost:3000/api/users/adddata', {
-
-
-            method: 'POST',
-
-            headers: {
-
-              'Content-Type': 'application/json',
+           
+              const response = await fetch('http://localhost:3000/api/users/getdata', {
 
 
-            },
+                   method: 'POST',
 
-            body: JSON.stringify({
 
-             email: email,
+                 headers:{
 
-             message: "DABAO"
+                  'Content-type': 'application/json',
 
-            })
+                 },
+
+                  body: JSON.stringify({
+
+                   email: email
+
+
+
+
+
+
+
+
+                  })
+
+
+
+
+
+
+
+
+
+              })
+              
+                
+               const data = await response.json()
+
+              if (response.ok) {
+
+                //setcontent([...content, data ])
+                
+                setcontent(data);
+          
+
+                
+              }
+
+             // console.log(data)
+
+
+
+                
+
+                
+              } catch (error) {
+
+                console.log(error.message);
+                
+              }
+
+
+
+
+          
+         }
+
+
+
+       Fetch()
+
+
+
+     }, [email]) 
+
+
+     
+            useEffect(() => {
+
+            console.log(content)
+
+            }, [content])
+         
+
+          const renderr = content.map((pre, index) => (
+
+             <div key={index}>
+
+              <h1>{pre.message}</h1>
+
+                 
+                
 
            
 
@@ -49,111 +125,13 @@ export default  function Compnent({name, email}){
 
 
 
-
-            })
-
-            const data = await response.json()
-
-            if(response.ok){
-
-              console.log("data added", data)
-
-              alert("data database me add ho gya")
-
-
-
-            } else {
-
-             console.log(data.message)
-
-            }
-
-
-            
-          } catch (error) {
-
-            console.log(error.message)
-            
-          }
-
-
-
-            
-          }
-
-        
-
-
-
-        
-
-
-
-             useEffect(() => {
-
-
-               async function Fetch() {
-
-                    try {
-
-
-                       
-               const response = await fetch('http://localhost:3000/api/users/adddata')
-
-               const data = await response.json()
-
-               setcollection(data)
-
-
-
-
-                      
-                    } catch (error) {
-
-                      console.log(error.message)
-                      
-                    }
+             </div>
 
 
 
 
 
-                
-               }
-
-             
-              Fetch()
-             
-             
-             
-             
-             
-             }, [] )
-
-
-
-
-
-
-
-      const renderr =  collection.map((pre, index) => (
-
-
-            <div key={index}>
-
-             <h1>{pre.username}</h1>
-
-
-
-
-            </div>
-
-
-
-
-
-        ))
-
+          ))
 
 
 
@@ -168,7 +146,7 @@ export default  function Compnent({name, email}){
         <Form.Control aria-label="First name" />
 
 
-          <Button onClick={Click}>DABAO</Button>
+          <Button>DABAO</Button>
 
 
 
@@ -176,8 +154,8 @@ export default  function Compnent({name, email}){
 
         <h1>WELCOME {name} 🏋 </h1>
 
-        {renderr}
-
+      
+        {renderr}          
 
         </div>
 
