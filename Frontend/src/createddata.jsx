@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from 'react-bootstrap';
 
-export default function Created() {
+export default function Created({email}) {
 
     const[message, setmessage] = useState("")
 
@@ -51,7 +51,9 @@ export default function Created() {
 
           body: JSON.stringify({
 
-          message: newarr
+          email: email,
+
+          message: newarr,
 
 
 

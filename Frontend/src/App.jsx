@@ -277,7 +277,7 @@ export default function App() {
      
             {dark && <Compnent name={name} email={email}/>}
 
-            {dark && <Created/>}
+            {dark && <Created email={email}/>}
      
      </>
 
