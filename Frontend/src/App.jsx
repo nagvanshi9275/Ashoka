@@ -11,6 +11,8 @@ import { Button } from 'react-bootstrap';
 
 import Compnent from "./component";
 
+import Created from "./createddata";
+
 export default function App() {
 
    const[name, setname] = useState("")
@@ -274,6 +276,8 @@ export default function App() {
             }
      
             {dark && <Compnent name={name} email={email}/>}
+
+            {dark && <Created/>}
      
      </>
 

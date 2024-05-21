@@ -18,6 +18,8 @@ export default  function Compnent({name, email}){
 
   const[content, setcontent] = useState([])
 
+  const[manal, setmanal] = useState([])
+
      useEffect(() => {
 
 
@@ -68,7 +70,7 @@ export default  function Compnent({name, email}){
 
                 //setcontent([...content, data ])
                 
-                setcontent(data);
+                setcontent([...content, data]);
           
 
                 
@@ -110,11 +112,23 @@ export default  function Compnent({name, email}){
             }, [content])
          
 
-          const renderr = content.map((pre, index) => (
+        
 
-             <div key={index}>
+            const renderr = content.map((pre, index) => (
 
-              <h1>{pre.message}</h1>
+              <div key={index}>
+
+                {pre.message.map((msg, msgIndex) => (
+
+
+                  <p key={msgIndex}>{msg}</p>
+
+                ))}
+
+              </div>
+
+              
+            ));
 
                  
                 
@@ -124,14 +138,34 @@ export default  function Compnent({name, email}){
 
 
 
-
-             </div>
-
+         // let manal = content[0].message
 
 
+         // useEffect(() => {
+
+           // setmanal([content[0].message])
 
 
-          ))
+
+          //}, [content])
+
+
+
+
+          function Dabao() {
+
+
+            console.log(manal)
+
+            
+          }
+
+         
+
+          
+
+
+          
 
 
 
@@ -146,7 +180,7 @@ export default  function Compnent({name, email}){
         <Form.Control aria-label="First name" />
 
 
-          <Button>DABAO</Button>
+          <Button onClick={Dabao}>DABAO</Button>
 
 
 
