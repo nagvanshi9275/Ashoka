@@ -1,146 +1,110 @@
 
 
 
+import React, { useState } from "react";
 
-import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
-import { Button } from 'react-bootstrap';
+export default function Created({email}){
 
-export default function Created({email}) {
-
-    const[message, setmessage] = useState("")
-
-    const[array, setarray] = useState([])
-
-
-
-          function Change(e) {
-
-            setmessage(e.target.value)
-            
-          }
+     const[text, settext] = useState("")
 
 
 
 
+        function Change(e) {
+
+          settext(e.target.value)
+          
+        }
+
+        async function Add() {
 
 
+           try {
+
+           const response = await fetch('http://localhost:3000/api/users/adddata', {
 
 
-       async function handleClick() {
-
-       // setarray([...array, message])
-
-       const newarr = [...array, message]
-
-       setarray(newarr)
-
-        try {
-
-         const response = await fetch('http://localhost:3000/api/users/adddata', {
-
-          method: 'POST',
-
-          headers:{
-
-            'Content-type': 'application/json',
-
-
-
-          },
-
-          body: JSON.stringify({
-
-          email: email,
-
-          message: newarr,
-
-
-
-
-          })
-
-
-
-
-         })
-
-          const data = await response.json()
-
-          console.log(data)
-
+            method: 'POST',
 
             
-        } catch (error) {
+
+            headers:{
+
+              'Content-type': 'application/json',
+
+             },
+
+             body: JSON.stringify({
+
+              email: email,
+
+              message: text
+
+
+
+
+
+
+
+
+             })
+
+
+
+
+
+           })
+
+           const data = await response.json()
+
+            
+           } catch (error) {
 
             console.log(error.message)
             
-        }
-
-            
-            
-        }
-
-
-    
-      //useEffect(() => {
+           }
 
 
 
-
-
-     // }, [array])
-
-
-
-
-
-
-
-    return(
-
-          <div>
-
-             
-
-             <input onChange={Change} type="text"  />
           
-
-             <Button variant="primary" onClick={handleClick}>Add data
-      </Button>
+         }
 
 
 
+         return(
+
+             <div>
 
 
-
-
-          </div>
-
-
-
-
-
-
-
-
-    )
-
-
+              <input onChange={Change} type="text" />
+             
+             
+             <Button onClick={Add}>Add+</Button>
+             
+             
+             
+             
+             
+             
+             </div>
 
 
 
 
 
-    
+
+
+         )
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
 
 
 
