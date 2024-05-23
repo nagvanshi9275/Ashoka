@@ -1,311 +1,211 @@
 
 
 
-import React, { Component } from "react"
-
-import { useState } from "react"
-
+import React, { useEffect, useState } from "react";
 import "./App.css";
-
-import { Button } from 'react-bootstrap';
-
-import Compnent from "./component";
-
+import { Button, Container, Row, Col, Form, Navbar } from 'react-bootstrap';
+import Component from "./component";
 import Created from "./createddata";
 
 export default function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(true);
+  const [dark, setDark] = useState(false);
 
-   const[name, setname] = useState("")
-
-   const[email, setemail] = useState("")
-
-   const[password, setpassword] = useState("")
-
-   const[show, setshow] = useState(true)
-
-   const[dark, setdark] = useState(false)
+  const[content, setcontent] = useState([])
 
 
 
-     
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
 
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
 
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
 
+  async function register() {
+    if (!name || !email || !password) {
+      alert("All fields are required for registration");
+      return;
+    }
 
-     function Name(e) {
+    try {
+      const response = await fetch('http://localhost:3000/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ username: name, email, password })
+      });
 
-        setname(e.target.value)
+      const data = await response.json();
+      console.log("user registered", data);
+      setShow(false);
+      setDark(true);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
+  async function login() {
+    if (!name || !email || !password) {
+      alert("All fields are required for registration");
+      return;
+    }
 
-      
-     }
+    try {
+      const response = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ username: name, email, password })
+      });
 
-      function Email(e) {
-
-        setemail(e.target.value)
-
-
-        
+      const data = await response.json();
+      if (response.ok) {
+        console.log("user logged in", data);
+        setShow(false);
+        setDark(true);
+      } else {
+        alert('Incorrect password. Please try again.');
       }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
-      function Password(e) {
 
-        setpassword(e.target.value)
-       
-        
-      }
 
-     async function Register() {
+  async  function fetchData() {
 
-       // console.log("Name:", name, "Email:", email, "Password :", password)
+     try {
 
-       if (!name || !email || !password) {
-        alert("All fields are required for registration");
-        return;
-      }
-
-
-
-
-
-
-
-           try {
-
-            const response = await fetch('http://localhost:3000/api/users/register', {
-
-             method: 'POST',
-
-               headers: {
-
-                'Content-type': 'application/json',
-
-
-
-               },
-
-
-              body: JSON.stringify({
-
-                username: name, email, password
-                
-                
-
-
-
-
-
-
-
-
-
-              })
-
-             
-
-
-
-
-
-
-
-
-
-            })
-
-               const data = await response.json()
-
-               console.log("user registered", data)
-
-                setshow(false)
-
-                setdark(true)
-
-            
-           } catch (error) {
-
-           console.log(error.message);
-
-
-            
-           }
-
-
-
-
-
-
-
-
-
-
-        
-      }
-
- 
-
-
-        async function Login() {
-
-          if (!name || !email || !password) {
-            alert("All fields are required for registration");
-            return;
-          }
-
-
-
-
-
-
-
-         try {
-
-         const response = await fetch('http://localhost:3000/api/users/login', {
+      const response = await fetch('http://localhost:3000/api/users/getdata', {
 
           method: 'POST',
-
-
-          headers: {
+    
+          headers:{
 
             'Content-type': 'application/json',
 
 
-
           },
 
-              body: JSON.stringify({
-
-               username: name,
-
-               email: email,
-
-               password: password
+          body: JSON.stringify({
 
 
+         email: email
 
 
-              })
-            
+          })
 
 
 
-         })
-
-          const data = await response.json()
-
-        
-         
-         //setshow(false)
-
-        // setdark(true)
-
-         if(response.ok){
-
-          console.log("user logged in", data)   
-
-         setshow(false)
-
-         setdark(true)
 
 
-         } else {
+      })
 
-           alert('SAHI PASSWORD LIKHO BABY!!!')
+      const data = await response.json()
 
-         }
+      if(response.ok){
 
+        setcontent([data])
+    
 
-          
-         } catch (error) {
-
-           console.log(error.message)
-
-          // setshow(true)
-
-          // setdark(false)
-
-
-          
-         }
-           
+      }
 
 
 
-         }
 
-          
-       
+      
+     } catch (error) {
+
+      console.log(error.message)
+      
+     }
       
 
-   
 
 
-    return(
+      
+    }
 
-     <>
+   useEffect(() =>{
+
+    if(email){
+
+      fetchData()
 
 
+    }
+
+
+   },[email])
+
+
+
+
+
+  return (
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand href="#">MyApp</Navbar.Brand>
+        </Container>
+      </Navbar>
+      <Container className="mt-4">
         {show &&
-     
-        <div className="form">
-
-
-            <input className="input3" onChange={Name} placeholder="Username" type="text" />
-            
-            
-            
-            <input className="input3" onChange={Email} placeholder="Email" type="text" />
-            
-          
-            <input className="input3" onChange={Password} placeholder="Password" type="text" />
-
-
-            <button className="don" onClick={Register}>Register!!</button>
-
-             
-             <Button className="dhoni" onClick={Login}>LOGIN</Button>
-
-             
-
-        </div>
-     
-     
-     
-     
-     
-            }
-     
-            {dark && <Compnent name={name} email={email}/>}
-
-            {dark && <Created email={email}/>}
-     
-     </>
-
-
-
-
-
-
-
-
-    )
-
-
-
-
-
-
-
-
-  
+          <Row className="justify-content-center">
+            <Col xs={12} md={6}>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter username"
+                    onChange={handleNameChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={handleEmailChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter password"
+                    onChange={handlePasswordChange}
+                  />
+                </Form.Group>
+                <Button variant="primary" className="me-2" onClick={register}>
+                  Register
+                </Button>
+                <Button variant="secondary" onClick={login}>
+                  Login
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        }
+        {dark && <Created email={email} fetchData={fetchData}/>}
+        {dark && <Component name={name} email={email} content={content} />}
+      </Container>
+    </>
+  );
 }
-
-
-
-
-
-
-
 
 
 

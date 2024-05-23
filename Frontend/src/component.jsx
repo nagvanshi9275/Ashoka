@@ -1,212 +1,64 @@
 
 
 import React, { useEffect, useState } from "react";
-
-import {Button} from "react-bootstrap";
-
+import { Button, Container, Row, Col, Navbar, Form } from "react-bootstrap";
 import "./App.css";
 
+//import Created from "./createddata";
 
-import Form from 'react-bootstrap/Form';
+export default function Component({ name, email, content }) {
+ // const [content, setContent] = useState([]);
+  const [manal, setManal] = useState([]);
+
+  const renderContent = content.map((pre, index) => (
+    <Row key={index} className="justify-content-center mb-3">
+      <Col xs={12} md={8}>
+        {pre.message.map((msg, msgIndex) => (
+          <div className="message-box" key={msgIndex}>
+            <Row>
+              <Col xs={10}>
+                <p>{msg}</p>
+              </Col>
+              <Col xs={2} className="text-end">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-trash3"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                </svg>
+              </Col>
+            </Row>
+          </div>
+        ))}
+      </Col>
+    </Row>
+  ));
+
  
 
 
 
 
-export default  function Compnent({name, email}){
-
-
-  const[content, setcontent] = useState([])
-
-  const[manal, setmanal] = useState([])
-
-     useEffect(() => {
-
-
-         async function Fetch() {
-
-              try {
-
-           
-              const response = await fetch('http://localhost:3000/api/users/getdata', {
-
-
-                   method: 'POST',
-
-
-                 headers:{
-
-                  'Content-type': 'application/json',
-
-                 },
-
-                  body: JSON.stringify({
-
-                   email: email
-
-
-
-
-
-
-
-
-                  })
-
-
-
-
-
-
-
-
-
-              })
-              
-                
-               const data = await response.json()
-
-              if (response.ok) {
-
-                //setcontent([...content, data ])
-                
-                setcontent([...content, data]);
-          
-
-                
-              }
-
-             // console.log(data)
-
-
-
-                
-
-                
-              } catch (error) {
-
-                console.log(error.message);
-                
-              }
-
-
-
-
-          
-         }
-
-
-
-       Fetch()
-
-
-
-     }, [email]) 
-
-
-     
-            useEffect(() => {
-
-            console.log(content)
-
-            }, [content])
-         
-
-        
-
-            const renderr = content.map((pre, index) => (
-
-              <div key={index}>
-
-                {pre.message.map((msg, msgIndex) => (
-
-
-                  <p key={msgIndex}>{msg}</p>
-
-                ))}
-
-              </div>
-
-              
-            ));
-
-                 
-                
-
-           
-
-
-
-
-         // let manal = content[0].message
-
-
-         // useEffect(() => {
-
-           // setmanal([content[0].message])
-
-
-
-          //}, [content])
-
-
-
-
-          function Dabao() {
-
-
-            console.log(manal)
-
+  return (
+    <div className="emil">
+      <Container className="mt-4">
+        <Row className="justify-content-center">
+          <Col xs={12} md={8}>
             
-          }
-
-         
-
-          
+            <div>{renderContent}</div>
+          </Col>
+        </Row>
 
 
-          
+       
 
-
-
-
-       return(
-
-
-
-        <div className="emil">
-
-
-        <Form.Control aria-label="First name" />
-
-
-          <Button onClick={Dabao}>DABAO</Button>
-
-
-
-
-
-        <h1>WELCOME {name} 🏋 </h1>
-
-      
-        {renderr}          
-
-        </div>
-
-
-
-
-
-
-
-       )
-
-
-
-
-
-
-
+      </Container>
+    </div>
+  );
 }
 
 
