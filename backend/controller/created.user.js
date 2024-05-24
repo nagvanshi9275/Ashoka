@@ -72,8 +72,21 @@ export default async function Createddata(req, res) {
 
 
 
+
+
+
+
+
     
 }
+
+
+
+
+
+
+
+
 
 
 
