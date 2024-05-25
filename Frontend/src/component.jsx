@@ -6,9 +6,11 @@ import "./App.css";
 
 //import Created from "./createddata";
 
-export default function Component({ name, email, content }) {
+export default function Component({ name, email, content, fetchData }) {
  // const [content, setContent] = useState([]);
   const [manal, setManal] = useState([]);
+
+  let atal; // for edit
 
   const renderContent = content.map((pre, index) => (
     <Row key={index} className="justify-content-center mb-3">
@@ -62,16 +64,137 @@ export default function Component({ name, email, content }) {
 
       
 
-     function Edit(msgIndex) {
+    async function Edit(msgIndex) {
 
-         console.log(msgIndex)
+         //console.log(msgIndex)
+
+        atal = prompt('')
+
+      
+
+
+
+
+
+
+       try {
+
+        const response =  await fetch('http://localhost:3000/api/users/edit', {
+
+
+        method: 'POST', 
+
+
+        headers:{
+
+          'Content-type': 'application/json',
+
+
+
+        },
+
+        body: JSON.stringify({
+
+        email: email,
+
+        index: msgIndex,
+
+       message: atal
+
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+        })
+
+        
+        
+        const data = await response.json()
+
+        fetchData()
+
+        
+       } catch (error) {
+
+        console.log(error.message)
+
+        
+       }
+
+
+
+
+
+
       
      }
 
 
-     function Delete(msgIndex) {
+    async function  Delete(msgIndex) {
 
-      console.log(msgIndex)
+      
+
+
+      try {
+
+        const response = await fetch('http://localhost:3000/api/users/delete', {
+
+
+         method: 'POST',
+
+         headers:{
+
+          'Content-type': 'application/json',
+
+
+
+         },
+
+         body: JSON.stringify({
+
+         email: email,
+
+         index: msgIndex
+      
+
+
+         })
+
+
+
+
+
+
+
+
+
+
+
+        })
+
+
+        const data = await response.json()
+
+        fetchData()
+
+
+        
+      } catch (error) {
+
+      console.log(error.message)
+        
+      }
+
+      
       
      }
 

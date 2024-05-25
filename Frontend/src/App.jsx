@@ -201,7 +201,7 @@ export default function App() {
           </Row>
         }
         {dark && <Created email={email} fetchData={fetchData}/>}
-        {dark && <Component name={name} email={email} content={content} />}
+        {dark && <Component name={name} email={email} content={content} fetchData={fetchData} />}
       </Container>
     </>
   );
