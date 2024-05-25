@@ -3,9 +3,9 @@
 
 
 
-import { Userdata } from "../models/userdata.model";
+import { Userdata } from "../models/userdata.model.js";
 
-import { User } from "../models/user.models";
+import { User } from "../models/user.models.js";
 
 
 export default async function Delete(req, res) {
@@ -23,7 +23,7 @@ export default async function Delete(req, res) {
          let userdata = await Userdata.findOne({username: user.username})   
 
          
-          userdata.splice(index, 1)
+          userdata.message.splice(index, 1)
 
           await userdata.save()
 
@@ -43,6 +43,10 @@ export default async function Delete(req, res) {
 
     
 }
+
+
+
+
 
 
 

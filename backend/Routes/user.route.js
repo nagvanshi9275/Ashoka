@@ -16,6 +16,11 @@ import Createddata from '../controller/created.user.js';
 import Getdata from '../controller/getdata.user.js';
 
 
+import Delete from '../controller/user.delete.js';
+
+import Edit from '../controller/user.edit.js';
+
+
 const router = express.Router();
 
 router.post('/register', registerUser);
@@ -26,13 +31,19 @@ router.post('/adddata', Createddata)
 
 router.post('/getdata', Getdata)
 
+
+router.post('/delete', Delete)
+
+router.post('/edit', Edit)
+
 export default router;
 
 
 
+//router.post('/delete', Delete)
 
 
-
+//delete
 
 
 
