@@ -102,7 +102,7 @@ export default function Component({ name, email, content, fetchData }) {
        message: atal
 
 
-
+     
 
 
         })

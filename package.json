@@ -1,0 +1,19 @@
+{
+  "name": "ashoka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagvanshi9275/Ashoka.git"
+  },
+  "author": "ashish nagvanshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nagvanshi9275/Ashoka/issues"
+  },
+  "homepage": "https://github.com/nagvanshi9275/Ashoka#readme"
+}
