@@ -1,12 +1,28 @@
+
+
 [build]
-  command = "npm run build"
+  command = "npm run build --prefix frontend"
   publish = "frontend/dist"
 
 [dev]
-  command = "npm run dev"
+  command = "npm run dev --prefix frontend"
   targetPort = 3000
   port = 8888
   framework = "#custom"
 
 [build.environment]
   MONGODB_URI = "mongodb+srv://aashishsingh24032005:AshishMaurya123@cluster0.a2uldlq.mongodb.net"
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:5000/:splat"
+  status = 200
+  force = true
+
+
+
+
+
+
+
+
