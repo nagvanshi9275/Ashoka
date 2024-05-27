@@ -1,11 +1,11 @@
 
 
 [build]
-  command = "npm run build --prefix Frontend"
+  command = "cd Frontend && npm install && npm run build"
   publish = "Frontend/dist"
 
 [dev]
-  command = "npm run dev --prefix Frontend"
+  command = "cd Frontend && npm install && npm run dev"
   targetPort = 3000
   port = 8888
   framework = "#custom"
@@ -18,7 +18,6 @@
   to = "http://localhost:5000/:splat"
   status = 200
   force = true
-
 
 
 
