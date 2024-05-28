@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: my-backend-service
+    env: node
+    buildCommand: 'cd backend && npm install'
+    startCommand: 'cd backend && npm start'
+
+
+
+
