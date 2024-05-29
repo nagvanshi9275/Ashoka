@@ -37,7 +37,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/register', {
+      const response = await fetch('https://ashoka-6.onrender.com/api/users/register', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -61,7 +61,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
+      const response = await fetch('https://ashoka-6.onrender.com/api/users/login', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -88,7 +88,7 @@ export default function App() {
 
      try {
 
-      const response = await fetch('http://localhost:3000/api/users/getdata', {
+      const response = await fetch('https://ashoka-6.onrender.com/api/users/getdata', {
 
           method: 'POST',
     
